@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_basic/bloc/image_picker/image_picker_bloc.dart';
 import 'package:flutter_bloc_basic/bloc/switch_button_bloc/switch_bloc.dart';
-import 'package:flutter_bloc_basic/ui/switch_button/switch_screen.dart';
+import 'package:flutter_bloc_basic/ui/image_picker/image_picker_screen.dart';
+import 'package:flutter_bloc_basic/utils/image_picker_utils.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,8 +15,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => SwitchBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => SwitchBloc()),
+        BlocProvider(create: (_) => ImagePickerBloc(ImagePickerUtils())),
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -22,7 +27,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         debugShowCheckedModeBanner: false,
-        home: const SwitchScreen(),
+        home: const ImagePickerScreen(),
       ),
     );
   }
