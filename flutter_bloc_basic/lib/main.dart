@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_basic/bloc/image_picker/image_picker_bloc.dart';
+import 'package:flutter_bloc_basic/bloc/post_bloc/bloc/post_bloc.dart';
 import 'package:flutter_bloc_basic/bloc/switch_button_bloc/switch_bloc.dart';
 import 'package:flutter_bloc_basic/bloc/todo_bloc/to_do_bloc.dart';
-import 'package:flutter_bloc_basic/ui/todo/to_do_screen.dart';
+import 'package:flutter_bloc_basic/repository/post_repository.dart';
+import 'package:flutter_bloc_basic/ui/post/post_screen.dart';
 import 'package:flutter_bloc_basic/utils/image_picker_utils.dart';
 
 void main() {
@@ -21,6 +23,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => SwitchBloc()),
         BlocProvider(create: (_) => ImagePickerBloc(ImagePickerUtils())),
         BlocProvider(create: (_) => ToDoBloc()),
+        BlocProvider(create: (_) => PostBloc(PostRepository())),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -29,7 +32,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         debugShowCheckedModeBanner: false,
-        home: const ToDoScreen(),
+        home: const PostScreen(),
       ),
     );
   }
